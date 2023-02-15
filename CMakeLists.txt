@@ -18,12 +18,12 @@ elseif (${CMAKE_CXX_COMPILER_ID} STREQUAL GNU)
     set(WHICH_COMPILER gcc)
 endif ()
 #根据编译器不同决定库不同
-set(spdlog_DIR /Volumes/Disi1lusion/Repository/CPP/spdlog/${WHICH_COMPILER}/lib/cmake/spdlog)
+set(spdlog_DIR /Volumes/Disi1lusion/Repository/CPP/libs/spdlog/${WHICH_COMPILER}/lib/cmake/spdlog)
 find_package(spdlog REQUIRED)
-set(fmt_DIR /Volumes/Disi1lusion/Repository/CPP/fmt/lib/cmake/fmt)
+set(fmt_DIR /Volumes/Disi1lusion/Repository/CPP/libs/fmt/lib/cmake/fmt)
 find_package(fmt REQUIRED)
 find_package(GLFW3 REQUIRED)
-set(glad_DIR /Volumes/Disi1lusion/Repository/CPP/glad)
+set(glad_DIR /Volumes/Disi1lusion/Repository/CPP/libs/glad)
 find_package(glad REQUIRED )
 set(LIBRARY_LIST
         spdlog::spdlog
