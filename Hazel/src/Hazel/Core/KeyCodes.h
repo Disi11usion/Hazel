@@ -6,7 +6,7 @@
 
 namespace Hazel
 {
-using KeyCode = unsigned short;
+using KeyCode = uint16_t;
 
 namespace Key
 {

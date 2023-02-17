@@ -24,12 +24,15 @@ set(fmt_DIR /Volumes/Disi1lusion/Repository/CPP/libs/fmt/lib/cmake/fmt)
 find_package(fmt REQUIRED)
 find_package(GLFW3 REQUIRED)
 set(glad_DIR /Volumes/Disi1lusion/Repository/CPP/libs/glad)
-find_package(glad REQUIRED )
+find_package(glad REQUIRED)
+set(imgui_DIR /Volumes/Disi1lusion/Repository/CPP/libs/imgui)
+find_package(imgui REQUIRED)
 set(LIBRARY_LIST
         spdlog::spdlog
         fmt::fmt
         glfw
         glad::glad
+        imgui::imgui
         )
 link_libraries(${LIBRARY_LIST})
 #头文件目录

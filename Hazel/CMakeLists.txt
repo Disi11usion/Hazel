@@ -11,7 +11,7 @@ set(LIBRARY_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/bin/${CMAKE_BUILD_TYPE}/${PROJECT_NA
 set(CMAKE_DEBUG_POSTFIX "_d")
 set(CMAKE_RELEASE_POSTFIX "_r")
 #正文
-include_directories(BEFORE ${PROJECT_SOURCE_DIR}/src )
+include_directories(BEFORE ${PROJECT_SOURCE_DIR}/src)
 file(GLOB_RECURSE SOURCE_CODES ${PROJECT_SOURCE_DIR}/src/*.cpp)
 add_library(Hazel SHARED ${SOURCE_CODES})
 #导出属性

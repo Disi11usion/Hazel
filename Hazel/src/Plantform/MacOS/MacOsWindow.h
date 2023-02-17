@@ -3,11 +3,9 @@
 //
 
 #pragma once
-#pragma once
 
 #include "Hazel/Window.h"
 #include "Hazel/Events/Event.h"
-#include "glad/glad.h"
 #include <GLFW/glfw3.h>
 
 namespace Hazel {
@@ -39,7 +37,6 @@ class MacOsWindow : public Window {
     std::string title;
     unsigned int width, height;
     bool v_sync;
-
     EventCallbackFn event_callback;
   };
 

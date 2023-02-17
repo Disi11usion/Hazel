@@ -1,6 +1,7 @@
 //
 // Created by 吴棋凡 on 2023/2/16.
 //
+#include <glad/glad.h>
 #include "MacOsWindow.h"
 #include "Hazel/Log.h"
 #include "Hazel/Events/ApplicationEvent.h"

@@ -52,7 +52,7 @@ enum EventCategory {
 class Event {
  public:
   virtual ~Event() = default;
-
+  Event()=default;
   bool handled_ = false;
 
   virtual EventType GetEventType() const = 0;
