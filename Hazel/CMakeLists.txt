@@ -13,5 +13,7 @@ set(CMAKE_RELEASE_POSTFIX "_r")
 #正文
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/src)
 file(GLOB_RECURSE SOURCE_CODES ${PROJECT_SOURCE_DIR}/src/*.cpp)
-add_library(Hazel SHARED ${SOURCE_CODES})
+add_library(Hazel STATIC ${SOURCE_CODES})
+set(INSTALL_LOCATION /Volumes/Disi1lusion/Repository/CPP/libs)
+set(CMAKE_INSTALL_PREFIX ${INSTALL_LOCATION})
 #导出属性

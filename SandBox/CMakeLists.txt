@@ -10,3 +10,5 @@ set(LIBRARY_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/bin/${CMAKE_BUILD_TYPE}/${PROJECT_NA
 include_directories(${HAZEL_INCLUDE_DIRS})
 add_executable(Sandbox src/SandBoxApp.cpp)
 target_link_libraries(Sandbox Hazel)
+set(INSTALL_LOCATION /Volumes/Disi1lusion/Repository/CPP/libs)
+set(CMAKE_INSTALL_PREFIX ${INSTALL_LOCATION})

@@ -5,33 +5,14 @@
 #include "ImGuiLayer.h"
 #include "Hazel/Application.h"
 Hazel::ImGuiLayer::ImGuiLayer() : Layer("ImGuiLayer") {}
-Hazel::ImGuiLayer::~ImGuiLayer() =default;
-void Hazel::ImGuiLayer::OnUpdate() {
-
-  ImGuiIO &im_gui_io = ImGui::GetIO();
-  const Application &application = Application::Get();
-  im_gui_io.DisplaySize = ImVec2(application.GetWindow().GetWidth(), application.GetWindow().GetHeight());
-
-  auto time = static_cast<float>(glfwGetTime());
-  im_gui_io.DeltaTime = time_ > 0.0f ? (time - time_) : (1.0f / 60.0f);
-  time_ = time;
-
-  ImGui_ImplOpenGL3_NewFrame();
-  ImGui_ImplGlfw_NewFrame();
-  ImGui::NewFrame();
-
-  static bool show = true;
-  ImGui::ShowDemoWindow(&show);
-  ImGui::Render();
-  ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-}
-void Hazel::ImGuiLayer::OnEvent(Hazel::Event &event) {
-}
+Hazel::ImGuiLayer::~ImGuiLayer() = default;
+void Hazel::ImGuiLayer::OnEvent(Hazel::Event &event) {}
 void Hazel::ImGuiLayer::OnAttach() {
   IMGUI_CHECKVERSION();
   ImGui::CreateContext();
   ImGuiIO &im_gui_io = ImGui::GetIO();
   (void)im_gui_io;
+  im_gui_io.Fonts->AddFontFromFileTTF("PingFang.ttc" ,  18 ,  nullptr, im_gui_io.Fonts->GetGlyphRangesChineseFull());
   im_gui_io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard; // Enable Keyboard Controls
   // io.ConfigFlags |= ImGuiConfigFlags_ViewportsNoTaskBarIcons;
   // io.ConfigFlags |= ImGuiConfigFlags_ViewportsNoMerge;
@@ -72,8 +53,26 @@ void Hazel::ImGuiLayer::SetDarkThemeColors() {
   colors[ImGuiCol_TitleBgActive] = ImVec4{0.15f, 0.1505f, 0.151f, 1.0f};
   colors[ImGuiCol_TitleBgCollapsed] = ImVec4{0.15f, 0.1505f, 0.151f, 1.0f};
 }
-
 void Hazel::ImGuiLayer::OnDetach() {
   ImGui_ImplOpenGL3_Shutdown();
   ImGui_ImplGlfw_Shutdown();
-  ImGui::DestroyContext(); }
+  ImGui::DestroyContext();
+}
+void Hazel::ImGuiLayer::Begin() {
+  ImGui_ImplOpenGL3_NewFrame();
+  ImGui_ImplGlfw_NewFrame();
+  ImGui::NewFrame();
+}
+void Hazel::ImGuiLayer::End() {
+  ImGuiIO &im_gui_io = ImGui::GetIO();
+  const Application &app = Application::Get();
+  im_gui_io.DisplaySize =
+      ImVec2(static_cast<float>(app.GetWindow().GetWidth()), static_cast<float>(app.GetWindow().GetHeight()));
+  // Rendering
+  ImGui::Render();
+  ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+}
+void Hazel::ImGuiLayer::OnImGuiRender() {
+  static bool show= true;
+  ImGui::ShowDemoWindow(&show);
+}

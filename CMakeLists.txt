@@ -27,12 +27,15 @@ set(glad_DIR /Volumes/Disi1lusion/Repository/CPP/libs/glad)
 find_package(glad REQUIRED)
 set(imgui_DIR /Volumes/Disi1lusion/Repository/CPP/libs/imgui)
 find_package(imgui REQUIRED)
+set(glm_DIR /Volumes/Disi1lusion/Repository/CPP/libs/glm/cmake/glm)
+find_package(glm REQUIRED)
 set(LIBRARY_LIST
         spdlog::spdlog
         fmt::fmt
         glfw
         glad::glad
         imgui::imgui
+        glm::glm
         )
 link_libraries(${LIBRARY_LIST})
 #头文件目录
@@ -43,4 +46,5 @@ add_subdirectory(${CMAKE_SOURCE_DIR}/SandBox)
 #debug release 后缀名
 #set_target_properties(${TARGET_NAME} PROPERTIES DEBUG_POSTFIX "_d")
 #set_target_properties(${TARGET_NAME} PROPERTIES RELEASE_POSTFIX "_r")
-
+set(INSTALL_LOCATION /Volumes/Disi1lusion/Repository/CPP/libs)
+set(CMAKE_INSTALL_PREFIX ${INSTALL_LOCATION})

@@ -3,10 +3,11 @@
 //
 
 #pragma once
+#include <GLFW/glfw3.h>
 
 #include "Hazel/Window.h"
 #include "Hazel/Events/Event.h"
-#include <GLFW/glfw3.h>
+#include "Hazel/Renderer/GraphicsContext.h"
 
 namespace Hazel {
 
@@ -32,7 +33,7 @@ class MacOsWindow : public Window {
   void Shutdown();
 
   GLFWwindow* window_;
-
+  GraphicsContext* graphics_context_{};
   struct WindowData {
     std::string title;
     unsigned int width, height;
