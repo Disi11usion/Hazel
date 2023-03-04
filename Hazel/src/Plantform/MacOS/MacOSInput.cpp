@@ -1,7 +1,7 @@
 //
 // Created by 吴棋凡 on 2023/2/17.
 //
-#include "Hazel/Input.h"
+#include "Hazel/Core/Input.h"
 #include "Hazel/Application.h"
 #include <GLFW/glfw3.h>
 namespace Hazel {

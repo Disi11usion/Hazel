@@ -3,7 +3,7 @@
 //
 
 #pragma once
-#include "Window.h"
+#include "Hazel/Core/Window.h"
 #include "Events/ApplicationEvent.h"
 #include "Hazel/Core/LayerStack.h"
 #include "Hazel/Gui/ImGuiLayer.h"

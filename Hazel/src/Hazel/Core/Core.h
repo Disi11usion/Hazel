@@ -3,7 +3,7 @@
 //
 
 #pragma once
-#include <hzpch.h>
+#include "hzpch.h"
 #ifdef HZ_PLATFORM_MACOS
 #ifdef HZ_BUILD_DLL
 #endif
