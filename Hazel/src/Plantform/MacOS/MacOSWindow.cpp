@@ -3,7 +3,7 @@
 //
 #include <glad/glad.h>
 #include "MacOsWindow.h"
-#include "Hazel/Log.h"
+#include "Hazel/Core/Log.h"
 #include "Hazel/Events/ApplicationEvent.h"
 #include "Hazel/Events/KeyEvent.h"
 #include "Hazel/Events/MouseEvent.h"

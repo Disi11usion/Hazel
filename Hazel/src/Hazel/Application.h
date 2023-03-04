@@ -10,6 +10,7 @@
 //templory
 #include "Hazel/Renderer/Buffer.h"
 #include "Hazel/Renderer/Shader.h"
+#include "Hazel/Renderer/VertexArray.h"
 namespace Hazel {
 class Application {
  public:
@@ -28,9 +29,9 @@ private:
   LayerStack layer_stack_;
   bool running_= true;
   bool OnWindowClosed(WindowCloseEvent& event);
-  unsigned int current_vao_=0;
-  std::unique_ptr<IndexBuffer> index_buffer_;
-  std::unique_ptr<VertexBuffer> vertex_buffer_;
+  std::unique_ptr<VertexArray> vertex_array_;
+  std::shared_ptr<IndexBuffer> index_buffer_;
+  std::shared_ptr<VertexBuffer> vertex_buffer_;
   std::unique_ptr<Shader> shader_;
 };
 Application* CreateApplication();

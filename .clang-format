@@ -1,4 +1,4 @@
 Language: Cpp
 BasedOnStyle: LLVM
-ColumnLimit: 120
+ColumnLimit: 100
 SortIncludes: Never

@@ -36,4 +36,4 @@ build-debug-gcc/
 build-debug-clang/
 /cmake-build-debug/
 /bin/Debug/
-/build-release-gcc/
+/bin/Release/

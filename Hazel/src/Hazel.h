@@ -6,7 +6,7 @@
 // Hazel Files
 #include "Hazel/Application.h"
 #include "Hazel/Core/Layer.h"
-#include "Hazel/Log.h"
+#include "Hazel/Core/Log.h"
 #include "Hazel/Core/Timestep.h"
 #include "Hazel/Input.h"
 #include "Hazel/Core/KeyCodes.h"

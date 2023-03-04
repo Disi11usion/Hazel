@@ -3,7 +3,7 @@
 //
 
 #include "OpenGLContext.h"
-#include "Hazel/Log.h"
+#include "Hazel/Core/Log.h"
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 

@@ -4,7 +4,7 @@
 
 #include "Shader.h"
 #include "glad/glad.h"
-#include "Hazel/Log.h"
+#include "Hazel/Core/Log.h"
 namespace Hazel {
 Shader::Shader(const std::string &vertex_src, const std::string &fragment_src) : rendererID_(glCreateProgram()) {
   unsigned int vertexShader = glCreateShader(GL_VERTEX_SHADER);

@@ -12,7 +12,9 @@ Hazel::OpenGLVertexBuffer::OpenGLVertexBuffer(float *vertices, uint32_t size) {
 void Hazel::OpenGLVertexBuffer::Bind() const { glBindBuffer(GL_ARRAY_BUFFER, renderID_); }
 void Hazel::OpenGLVertexBuffer::UnBind() const { glBindBuffer(GL_ARRAY_BUFFER, 0); }
 Hazel::OpenGLVertexBuffer::~OpenGLVertexBuffer() { glDeleteBuffers(1, &renderID_); }
-Hazel::OpenGLIndexBuffer::OpenGLIndexBuffer(uint32_t *indices, uint32_t count) {
+Hazel::BufferLayout& Hazel::OpenGLVertexBuffer::GetLayout() { return layout_; }
+void Hazel::OpenGLVertexBuffer::SetLayout(BufferLayout &layout) { layout_ = layout; }
+Hazel::OpenGLIndexBuffer::OpenGLIndexBuffer(uint32_t *indices, uint32_t count):count(count) {
   glGenBuffers(1, &renderID_);
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, renderID_);
   glBufferData(GL_ELEMENT_ARRAY_BUFFER, count * sizeof(uint32_t), indices, GL_STATIC_DRAW);
@@ -20,3 +22,4 @@ Hazel::OpenGLIndexBuffer::OpenGLIndexBuffer(uint32_t *indices, uint32_t count) {
 Hazel::OpenGLIndexBuffer::~OpenGLIndexBuffer() { glDeleteBuffers(1, &renderID_); }
 void Hazel::OpenGLIndexBuffer::Bind() const { glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, renderID_); }
 void Hazel::OpenGLIndexBuffer::UnBind() const { glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0); }
+uint32_t Hazel::OpenGLIndexBuffer::GetCount() const { return count; }
