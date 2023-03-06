@@ -7,32 +7,34 @@
 #include "Events/ApplicationEvent.h"
 #include "Hazel/Core/LayerStack.h"
 #include "Hazel/Gui/ImGuiLayer.h"
-//templory
+// templory
 #include "Hazel/Renderer/Buffer.h"
 #include "Hazel/Renderer/Shader.h"
 #include "Hazel/Renderer/VertexArray.h"
 namespace Hazel {
 class Application {
- public:
+public:
   Application();
   virtual ~Application();
   void Run();
-  void OnEvent(Event & ph_1);
-  void PushLayer(Layer* layer);
-  void PushOverLay(Layer* layer);
-   Window &GetWindow() const;
-  static Application& Get();
-  static Application* s_instance_;
+  void OnEvent(Event &ph_1);
+  void PushLayer(Layer *layer);
+  void PushOverLay(Layer *layer);
+  Window &GetWindow() const;
+  static Application &Get();
+  static Application *s_instance_;
+
 private:
-  ImGuiLayer* im_gui_layer_;
+  ImGuiLayer *im_gui_layer_;
   std::unique_ptr<Window> window_;
   LayerStack layer_stack_;
-  bool running_= true;
-  bool OnWindowClosed(WindowCloseEvent& event);
-  std::unique_ptr<VertexArray> vertex_array_;
+  bool running_ = true;
+  bool OnWindowClosed(WindowCloseEvent &event);
+  std::shared_ptr<VertexArray> vertex_array_;
   std::shared_ptr<IndexBuffer> index_buffer_;
-  std::shared_ptr<VertexBuffer> vertex_buffer_;
-  std::unique_ptr<Shader> shader_;
+  //std::shared_ptr<VertexBuffer> vertex_buffer_;
+  std::shared_ptr<Shader> shader_;
+  //std::shared_ptr<VertexArray> square_va_;
 };
-Application* CreateApplication();
-}  // namespace Hazel
+Application *CreateApplication();
+} // namespace Hazel

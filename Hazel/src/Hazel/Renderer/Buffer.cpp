@@ -8,9 +8,9 @@
 namespace Hazel {
 VertexBuffer *Hazel::VertexBuffer::Create(float *vertices, uint32_t size) {
   switch (Renderer::GetAPI()) {
-  case RendererAPI::None:
+  case RendererAPI::API::None:
     return nullptr;
-  case RendererAPI::OpenGL:
+  case RendererAPI::API::OpenGL:
     return new OpenGLVertexBuffer(vertices, size);
   default:
     return nullptr;
@@ -18,9 +18,9 @@ VertexBuffer *Hazel::VertexBuffer::Create(float *vertices, uint32_t size) {
 }
 IndexBuffer *Hazel::IndexBuffer::Create(uint32_t *indices, uint32_t count) {
   switch (Renderer::GetAPI()) {
-  case RendererAPI::None:
+  case RendererAPI::API::None:
     return nullptr;
-  case RendererAPI::OpenGL:
+  case RendererAPI::API::OpenGL:
     return new OpenGLIndexBuffer(indices, count);
   default:
     return nullptr;

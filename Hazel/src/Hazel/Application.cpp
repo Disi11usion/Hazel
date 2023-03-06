@@ -20,18 +20,20 @@ Application::Application() : im_gui_layer_(new ImGuiLayer()) {
       -0.5f, -0.5f, 0.0f, 0.8f, 0.8f, 0.2f, 1.0f, // bottom left
       -0.5f, 0.5f,  0.0f, 0.5f, 0.5f, 0.5f, 1.0f  // top left
   };
-  vertex_buffer_.reset(VertexBuffer::Create(positions));
-  vertex_buffer_->Bind();
+  std::shared_ptr<VertexBuffer> vertex_buffer;
+  vertex_buffer.reset(VertexBuffer::Create(positions));
+  vertex_buffer->Bind();
   BufferLayout layout = {{ShaderDataType::Float3, "a_Position"},
                          {ShaderDataType::FLoat4, "a_Color"}};
+  vertex_buffer->SetLayout(layout);
   //@TO DO:
-  vertex_buffer_->SetLayout(layout);
   std::array<unsigned int, 6> indices = {0, 1, 3,  // first Triangle
                                          1, 2, 3}; // second Triangle
   index_buffer_.reset(IndexBuffer::Create(indices));
   index_buffer_->Bind();
-  vertex_array_->AddVertexBuffer(vertex_buffer_);
+  vertex_array_->AddVertexBuffer(vertex_buffer);
   vertex_array_->SetIndexBuffer(index_buffer_);
+
   std::string vertex_src =
       "#version 410 core\n"
       "layout (location = 0) in vec3 a_Position;\n"
@@ -60,7 +62,10 @@ void Application::Run() {
   while (running_) {
     glClearColor(0.1f, 0.1f, 0.1f, 1);
     glClear(GL_COLOR_BUFFER_BIT);
+    Renderer::BeginScene();
     shader_->Bind();
+    Renderer::Submit(vertex_array_);
+    Renderer::EndScene();
     vertex_array_->Bind();
     glDrawElements(GL_TRIANGLES, index_buffer_->GetCount(), GL_UNSIGNED_INT, nullptr);
     for (auto *const layer : layer_stack_) {

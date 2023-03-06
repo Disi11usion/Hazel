@@ -4,14 +4,19 @@
 
 #include "OpenGLVertexArray.h"
 #include "glad/glad.h"
+#include "Hazel/Core/Log.h"
 namespace Hazel {
 void OpenGLVertexArray::Bind() const { glBindVertexArray(renderer_id_); }
 void OpenGLVertexArray::UnBind() const { glBindVertexArray(0); }
 void OpenGLVertexArray::AddVertexBuffer(const std::shared_ptr<VertexBuffer> &vertexBuffer) {
+  auto &layout = vertexBuffer->GetLayout();
+  if (layout.GetLayoutSize() == 0) {
+    Hazel::Log::CoreLog(Log::LogClassify::WARN, "Vertex Buffer Has No Layouts");
+    return;
+  }
   glBindVertexArray(renderer_id_);
   vertexBuffer->Bind();
   uint32_t index = 0;
-  auto &layout = vertexBuffer->GetLayout();
   for (const auto &item : layout) {
     glEnableVertexAttribArray(index);
     glVertexAttribPointer(index, item.GetElementCount(), ShaderDataTypeToOpenGLBaseType(item.type),
@@ -26,7 +31,6 @@ void OpenGLVertexArray::SetIndexBuffer(const std::shared_ptr<IndexBuffer> &index
   index_buffer_ = indexBuffer;
   index_buffer_->Bind();
 }
-void OpenGLVertexArray::SetLayout(const BufferLayout &&layout) {}
 OpenGLVertexArray::OpenGLVertexArray() : renderer_id_(0) { glGenVertexArrays(1, &renderer_id_); }
 uint32_t OpenGLVertexArray::ShaderDataTypeToOpenGLBaseType(ShaderDataType type) {
   switch (type) {
@@ -57,4 +61,8 @@ uint32_t OpenGLVertexArray::ShaderDataTypeToOpenGLBaseType(ShaderDataType type) 
     return GL_INT;
   }
 }
+const std::vector<std::shared_ptr<VertexBuffer>> &OpenGLVertexArray::GetVertexBuffers() {
+  return vertex_buffers_;
+}
+const std::shared_ptr<IndexBuffer> &OpenGLVertexArray::GetIndexBuffer() { return index_buffer_; }
 } // namespace Hazel

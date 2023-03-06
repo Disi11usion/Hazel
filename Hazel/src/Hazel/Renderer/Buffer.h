@@ -98,7 +98,7 @@ public:
   std::vector<BufferElement>::iterator begin() { return elements_.begin(); }
   std::vector<BufferElement>::iterator end() { return elements_.end(); }
   uint32_t GetStride() const { return stride_; }
-
+  uint32_t GetLayoutSize()const{return elements_.size();}
 private:
   std::vector<BufferElement> elements_;
   uint32_t stride_{0};

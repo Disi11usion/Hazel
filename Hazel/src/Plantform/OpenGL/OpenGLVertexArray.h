@@ -14,7 +14,8 @@ public:
   void UnBind() const override;
   void AddVertexBuffer(const std::shared_ptr<VertexBuffer> &vertexBuffer)  override;
   void SetIndexBuffer(const std::shared_ptr<IndexBuffer> &indexBuffer)  override;
-  void SetLayout(const BufferLayout &&layout) override;
+  const std::vector<std::shared_ptr<VertexBuffer>> &GetVertexBuffers() override;
+  const std::shared_ptr<IndexBuffer> &GetIndexBuffer() override;
   OpenGLVertexArray();
   static uint32_t ShaderDataTypeToOpenGLBaseType(ShaderDataType type);
 private:

@@ -11,8 +11,7 @@
 
 namespace Hazel {
 
-class Input
-{
+class Input {
 public:
   static bool IsKeyPressed(KeyCode key);
   static bool IsMouseButtonPressed(MouseCode button);
@@ -20,4 +19,4 @@ public:
   static float GetMouseX();
   static float GetMouseY();
 };
-}
+} // namespace Hazel

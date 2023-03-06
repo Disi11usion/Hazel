@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.20)
-project(Hazel_SandBox)
+project(Hazel_SandBox VERSION 0.1)
 set(CMAKE_CXX_STANDARD_REQUIRED 20)
 set(CMAKE_CXX_STANDARD 20)
 #输出目录
@@ -10,5 +10,6 @@ set(LIBRARY_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/bin/${CMAKE_BUILD_TYPE}/${PROJECT_NA
 include_directories(${HAZEL_INCLUDE_DIRS})
 add_executable(Sandbox src/SandBoxApp.cpp)
 target_link_libraries(Sandbox Hazel)
+#安装位置
 set(INSTALL_LOCATION /Volumes/Disi1lusion/Repository/CPP/libs)
 set(CMAKE_INSTALL_PREFIX ${INSTALL_LOCATION})

@@ -9,11 +9,11 @@ namespace Hazel {
 VertexArray *VertexArray::Create() {
   switch (Renderer::GetAPI()) {
 
-  case RendererAPI::None:
+  case RendererAPI::API::None:
     return nullptr;
-  case RendererAPI::OpenGL:
+  case RendererAPI::API::OpenGL:
     return new OpenGLVertexArray;
-  case RendererAPI::Vulkan:
+  case RendererAPI::API::Vulkan:
     return nullptr;
   }
 }
