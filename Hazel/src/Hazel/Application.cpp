@@ -2,9 +2,9 @@
 // Created by 吴棋凡 on 2023/2/15.
 //
 #include "hzpch.h"
-#include "glad/glad.h"
 #include "Application.h"
 #include "Hazel/Core/Log.h"
+#include "Renderer/Renderer.h"
 namespace Hazel {
 Application *Application::s_instance_ = nullptr;
 
@@ -29,10 +29,11 @@ Application::Application() : im_gui_layer_(new ImGuiLayer()) {
   //@TO DO:
   std::array<unsigned int, 6> indices = {0, 1, 3,  // first Triangle
                                          1, 2, 3}; // second Triangle
-  index_buffer_.reset(IndexBuffer::Create(indices));
-  index_buffer_->Bind();
+  std::shared_ptr<IndexBuffer> index_buffer;
+  index_buffer.reset(IndexBuffer::Create(indices));
+  index_buffer->Bind();
   vertex_array_->AddVertexBuffer(vertex_buffer);
-  vertex_array_->SetIndexBuffer(index_buffer_);
+  vertex_array_->SetIndexBuffer(index_buffer);
 
   std::string vertex_src =
       "#version 410 core\n"
@@ -60,14 +61,12 @@ Application::~Application() = default;
 
 void Application::Run() {
   while (running_) {
-    glClearColor(0.1f, 0.1f, 0.1f, 1);
-    glClear(GL_COLOR_BUFFER_BIT);
+    RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 1});
+    RenderCommand::Clear();
     Renderer::BeginScene();
     shader_->Bind();
     Renderer::Submit(vertex_array_);
     Renderer::EndScene();
-    vertex_array_->Bind();
-    glDrawElements(GL_TRIANGLES, index_buffer_->GetCount(), GL_UNSIGNED_INT, nullptr);
     for (auto *const layer : layer_stack_) {
       layer->OnUpdate();
     }

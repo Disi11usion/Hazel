@@ -31,10 +31,7 @@ private:
   bool running_ = true;
   bool OnWindowClosed(WindowCloseEvent &event);
   std::shared_ptr<VertexArray> vertex_array_;
-  std::shared_ptr<IndexBuffer> index_buffer_;
-  //std::shared_ptr<VertexBuffer> vertex_buffer_;
   std::shared_ptr<Shader> shader_;
-  //std::shared_ptr<VertexArray> square_va_;
 };
 Application *CreateApplication();
 } // namespace Hazel
