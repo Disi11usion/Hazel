@@ -28,7 +28,7 @@ private:
   glm::mat4 projection_matrix_;
   glm::mat4 view_matrix_{};
   glm::mat4 view_projection_matrix{};
-  glm::vec3 position_{};
+  glm::vec3 position_{0.0f, 0.0f, 0.0f};
   float rotation_ = 0.0f;
 };
 

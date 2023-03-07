@@ -11,6 +11,7 @@
 #include "Hazel/Renderer/Buffer.h"
 #include "Hazel/Renderer/Shader.h"
 #include "Hazel/Renderer/VertexArray.h"
+#include "Hazel/Renderer/OrthographicCamera.h"
 namespace Hazel {
 class Application {
 public:
@@ -32,6 +33,7 @@ private:
   bool OnWindowClosed(WindowCloseEvent &event);
   std::shared_ptr<VertexArray> vertex_array_;
   std::shared_ptr<Shader> shader_;
+  OrthographicCamera camera_;
 };
 Application *CreateApplication();
 } // namespace Hazel

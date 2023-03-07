@@ -8,7 +8,7 @@
 namespace Hazel {
 Application *Application::s_instance_ = nullptr;
 
-Application::Application() : im_gui_layer_(new ImGuiLayer()) {
+Application::Application() : im_gui_layer_(new ImGuiLayer()), camera_(-1.6f, 1.6f, -0.9f, 0.9f) {
   window_ = std::unique_ptr<Window>(Window::Create());
   window_->SetEventCallback(std::bind(&Application::OnEvent, this, std::placeholders::_1));
   Application::s_instance_ = this;
@@ -39,11 +39,12 @@ Application::Application() : im_gui_layer_(new ImGuiLayer()) {
       "#version 410 core\n"
       "layout (location = 0) in vec3 a_Position;\n"
       "layout (location = 1) in vec4 a_Color;\n"
+      "uniform mat4 u_ViewProjection;\n"
       "out vec4 v_Color;\n"
       "\n"
       "void main()\n"
       "{\n"
-      "    gl_Position = vec4(a_Position.x, a_Position.y, a_Position.z, 1.0);\n"
+      "    gl_Position =u_ViewProjection* vec4(a_Position.x, a_Position.y, a_Position.z, 1.0);\n"
       "v_Color=a_Color;\n"
       "}";
   std::string fragment_src = "#version 410 core\n"
@@ -63,9 +64,10 @@ void Application::Run() {
   while (running_) {
     RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 1});
     RenderCommand::Clear();
-    Renderer::BeginScene();
-    shader_->Bind();
-    Renderer::Submit(vertex_array_);
+    camera_.SetPosition({0.5f,0.5f,0.0f});
+    camera_.SetRotation(45);
+    Renderer::BeginScene(camera_);
+    Renderer::Submit(shader_, vertex_array_);
     Renderer::EndScene();
     for (auto *const layer : layer_stack_) {
       layer->OnUpdate();
